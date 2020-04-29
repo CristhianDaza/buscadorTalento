@@ -1,9 +1,8 @@
 const express = require('express')
+const router = require('./routes')
 
 const app = express()
 
-app.use('/', (req, res) => {
-  res.send('Iniciando')
-})
+app.use('/', router())
 
 app.listen(5000)
