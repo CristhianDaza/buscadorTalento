@@ -1,5 +1,6 @@
 const express = require('express')
-const exhbs = require('express-handlebars');
+const exhbs = require('express-handlebars')
+const path = require('path')
 const router = require('./routes')
 
 const app = express()
@@ -12,6 +13,9 @@ app.engine('handlebars',
 )
 
 app.set('view engine', 'handlebars')
+
+// static files
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', router())
 
