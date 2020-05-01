@@ -33,6 +33,19 @@ exports.validarRegistro = (req, res, next) => {
   req.checkbody('confirmar', 'Confirmar contraseña es obligatorio').notEmpty()
   req.checkbody('confirmar', 'La contraseña es diferente').equals(req.body.password)
 
-
   const errores = req.validationErrors()
+
+  if (errores) {
+    // si no hay errores
+    req.flash('error', errores.map(error => error.msg))
+    res.render('crear-cuenta', {
+      nombrePagina: 'Crea tu cuenta en vevJobs',
+      tagline: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
+      mensajes: req.flash()
+    })
+    return
+  }
+
+  // si toda la validación es correcta
+  next()
 }
