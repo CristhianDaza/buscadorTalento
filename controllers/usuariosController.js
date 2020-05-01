@@ -18,3 +18,7 @@ exports.crearUsuario = async (req, res, next) => {
 
   res.redirect('/iniciar-sesion')
 }
+
+exports.validarRegistro = (req, res) => {
+
+}

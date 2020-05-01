@@ -9,13 +9,18 @@ require('dotenv').config({ path: './variables.env' })
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
+const flash = require('connect-flash')
 
 const app = express()
 
 // habilitar bodyparser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+// Validacion de campos
+app.use(expressValidator())
 
 // Habilitar handlebar como view
 app.engine('handlebars',
@@ -39,6 +44,15 @@ app.use(session({
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
+
+// Alertas y flash messages
+app.use(flash())
+
+// Crear nuestro middleware
+app.use((req, res, next) => {
+  res.locals.mensajes = req.flash
+  next()
+})
 
 app.use('/', router())
 
