@@ -19,6 +19,20 @@ exports.crearUsuario = async (req, res, next) => {
   res.redirect('/iniciar-sesion')
 }
 
-exports.validarRegistro = (req, res) => {
+exports.validarRegistro = (req, res, next) => {
+  //sanitizar
+  req.sanitizeBody('nombre').escape()
+  req.sanitizeBody('email').escape()
+  req.sanitizeBody('password').escape()
+  req.sanitizeBody('confirmar').escape()
 
+  // validar
+  req.checkbody('nombre', 'El nombre es obligatorio').notEmpty()
+  req.checkbody('email', 'El email debe ser valido').isEmail()
+  req.checkbody('password', 'La contraseña es obligatorio').notEmpty()
+  req.checkbody('confirmar', 'Confirmar contraseña es obligatorio').notEmpty()
+  req.checkbody('confirmar', 'La contraseña es diferente').equals(req.body.password)
+
+
+  const errores = req.validationErrors()
 }
