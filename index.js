@@ -50,7 +50,7 @@ app.use(flash())
 
 // Crear nuestro middleware
 app.use((req, res, next) => {
-  res.locals.mensajes = req.flash
+  res.locals.mensajes = req.flash()
   next()
 })
 

@@ -27,11 +27,11 @@ exports.validarRegistro = (req, res, next) => {
   req.sanitizeBody('confirmar').escape()
 
   // validar
-  req.checkbody('nombre', 'El nombre es obligatorio').notEmpty()
-  req.checkbody('email', 'El email debe ser valido').isEmail()
-  req.checkbody('password', 'La contraseña es obligatorio').notEmpty()
-  req.checkbody('confirmar', 'Confirmar contraseña es obligatorio').notEmpty()
-  req.checkbody('confirmar', 'La contraseña es diferente').equals(req.body.password)
+  req.checkBody('nombre', 'El nombre es obligatorio').notEmpty()
+  req.checkBody('email', 'El email debe ser valido').isEmail()
+  req.checkBody('password', 'La contraseña es obligatorio').notEmpty()
+  req.checkBody('confirmar', 'Confirmar contraseña es obligatorio').notEmpty()
+  req.checkBody('confirmar', 'La contraseña es diferente').equals(req.body.password)
 
   const errores = req.validationErrors()
 
