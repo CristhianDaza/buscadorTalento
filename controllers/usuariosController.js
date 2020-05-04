@@ -52,3 +52,10 @@ exports.validarRegistro = (req, res, next) => {
   // si toda la validación es correcta
   next()
 }
+
+// Crear formualrio para iniciar sesion
+exports.fornIniciarSesion = (req, res) => {
+  res.render('iniciar-sesion', {
+    nombrePagina: 'Iniciar Sesión devJobs'
+  })
+}
