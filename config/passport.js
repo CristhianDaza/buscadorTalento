@@ -7,14 +7,14 @@ const Usuarios = mongoose.model('Usuarios')
   usernameField: 'email',
   passwordField: 'password'
   }, async (email, password, done) => {
-    const usaurio = await Usuarios.findOne({ email })
+    const usuario = await Usuarios.findOne({ email })
 
-    if (!usaurio) return done(null, false, {
+    if (!usuario) return done(null, false, {
       message: 'Usarui no existente'
     })
 
     // El usuariuo existe, vamos a verificarlo
-    const verificarPass = usaurio.compararPassword(password)
+    const verificarPass = usuario.compararPassword(password)
 
     if (!verificarPass) return done(null, false, {
       message: 'Contraseña Incorrecta'
