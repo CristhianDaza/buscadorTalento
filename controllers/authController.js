@@ -2,5 +2,7 @@ const passport = require('passport')
 
 exports.autenticarUsaurio = passport.authenticate('local', {
   successRedirect: '/ok',
-  failureRedirect: '/mal'
+  failureRedirect: '/iniciar-sesion',
+  failureFlash: true,
+  badRequestMessage: 'Ambos campos son obligatorios'
 })
