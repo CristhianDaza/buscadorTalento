@@ -45,6 +45,12 @@ module.exports = () => {
   router.get('/iniciar-sesion', usuariosController.fornIniciarSesion)
   router.post('/iniciar-sesion', authController.autenticarUsaurio)
 
+  //Cerrar sesion
+  router.get('/cerrar-sesion',
+    authController.verificarUsuario,
+    authController.cerrarSesion
+  )
+
   // Panel de administracion
   router.get('/administracion',
     authController.verificarUsuario,
