@@ -3,6 +3,8 @@ const Vacante = require('../models/Vacantes')
 exports.formularioNuevaVacante = (req, res) => {
   res.render('nueva-vacante', {
     nombrePagina: 'Nueva Vacante',
+    cerrarSesion: true,
+    nombre: req.user.nombre,
     tagline: 'Llena el formulario y publica tu vacante'
   })
 }
@@ -47,6 +49,8 @@ exports.formEditarVacante = async (req, res, next) => {
 
   res.render('editar-vacante', {
     nombrePagina: `Editar - ${vacante.titulo}`,
+    cerrarSesion: true,
+    nombre: req.user.nombre,
     vacante
   })
 }

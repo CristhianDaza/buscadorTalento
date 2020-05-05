@@ -66,6 +66,8 @@ exports.formEditarPerfil = async (req, res) => {
 
   res.render('editar-perfil', {
     nombrePagina: 'Edita tu perfil en devJobs',
+    cerrarSesion: true,
+    nombre: req.user.nombre,
     usuarios
   })
 }
