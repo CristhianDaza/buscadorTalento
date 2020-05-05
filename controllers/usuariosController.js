@@ -59,3 +59,13 @@ exports.fornIniciarSesion = (req, res) => {
     nombrePagina: 'Iniciar Sesión devJobs'
   })
 }
+
+// Form editar el Perfil
+exports.formEditarPerfil = async (req, res) => {
+  const usuarios = await Usuarios.findOne({ nombre: req.user.nombre }).lean()
+
+  res.render('editar-perfil', {
+    nombrePagina: 'Edita tu perfil en devJobs',
+    usuarios
+  })
+}
