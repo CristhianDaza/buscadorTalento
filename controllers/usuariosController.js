@@ -23,7 +23,15 @@ const configuracionMulter = {
       cb(null, `${shortid.generate()}.${extencion}`)
 
     }
-  })
+  }),
+  fileFilter(req, file, cb) {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true)
+    } else {
+      cb(null, false)
+    }
+  },
+  limits: { fileSize: 100000 }
 }
 
 const upload = multer(configuracionMulter).single('imagen')
@@ -108,6 +116,11 @@ exports.editarPerfil = async (req, res) => {
   if (req.body.password) {
     usuario.password = req.body.password
   }
+
+  if(req.file) {
+    usuario.imagen = req.file.filename
+  }
+
   await usuario.save()
 
   req.flash('correcto', 'Cambios guardados Correctamente')
