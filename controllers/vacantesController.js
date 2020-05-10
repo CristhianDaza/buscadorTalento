@@ -5,6 +5,7 @@ exports.formularioNuevaVacante = (req, res) => {
     nombrePagina: 'Nueva Vacante',
     cerrarSesion: true,
     nombre: req.user.nombre,
+    imagen: req.user.imagen,
     tagline: 'Llena el formulario y publica tu vacante'
   })
 }
@@ -51,6 +52,7 @@ exports.formEditarVacante = async (req, res, next) => {
     nombrePagina: `Editar - ${vacante.titulo}`,
     cerrarSesion: true,
     nombre: req.user.nombre,
+    imagen: req.user.imagen,
     vacante
   })
 }

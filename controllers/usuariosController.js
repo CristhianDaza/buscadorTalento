@@ -113,6 +113,7 @@ exports.formEditarPerfil = async (req, res) => {
     nombrePagina: 'Edita tu perfil en devJobs',
     cerrarSesion: true,
     nombre: req.user.nombre,
+    imagen: req.user.imagen,
     usuarios
   })
 }
@@ -162,6 +163,7 @@ exports.validarPerfil = async (req, res, next) => {
       cerrarSesion: true,
       nombre: req.user.nombre,
       usuarios,
+      imagen: req.user.imagen,
       mensajes: req.flash()
     })
   }
