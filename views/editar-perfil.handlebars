@@ -1,5 +1,5 @@
 <main class="contenedor">
-  <form action="/editar-perfil" method="POST" class="default-form">
+  <form action="/editar-perfil" method="POST" class="default-form" enctype="multipart/form-data">
     <div class="campo">
       <label for="nombre">Nombre</label>
       <input value="{{usuarios.nombre}}" type="text" name="nombre" placeholder="Tu nombre" id="nombre" required>
@@ -11,6 +11,10 @@
     <div class="campo">
       <label for="password">Contraseña</label>
       <input type="text" name="password" placeholder="Tu Contraseña" id="password">
+    </div>
+    <div class="campo">
+      <label for="imagen">Imagen</label>
+      <input type="file" name="imagen" id="imagen">
     </div>
     <div class="campo">
       <input type="submit" class="btn btn-azul" value="Guardar Cambios">
