@@ -171,3 +171,26 @@ const configuracionMulter = {
 }
 
 const upload = multer(configuracionMulter).single('cv')
+
+// almacenar los candidatos en la bd
+exports.contactar = async (req, res, next) => {
+  const vacante = await Vacante.findOne({ url: req.params.url })
+
+  // sino existe la vacante
+  if (!vacante) return next()
+
+  // todo bien construir el nuevo objeto
+  const nuevoCandidato = {
+    nombre: req.body.nombre,
+    email: req.body.email,
+    cv: req.file.filename
+  }
+
+  // almacenar la vacante
+  vacante.candidatos.push(nuevoCandidato)
+  await vacante.save()
+
+  // mensaje flash y redireccion
+  req.flash('correcto', 'Se envió tu Corriculum correctamente')
+  res.redirect('/')
+}

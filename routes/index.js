@@ -80,7 +80,7 @@ module.exports = () => {
   // Recibir mensajes de candidatos
   router.post('/vacantes/:url',
     vacantesController.subirCV,
-    // vacantesController.contactar
+    vacantesController.contactar
   )
 
   return router
