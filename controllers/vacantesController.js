@@ -1,4 +1,6 @@
 const Vacante = require('../models/Vacantes')
+const multer = require('multer')
+const shortid = require('shortid')
 
 exports.formularioNuevaVacante = (req, res) => {
   res.render('nueva-vacante', {
@@ -125,3 +127,47 @@ const verificarAutor = (vacante = {}, usuario = {}) => {
   }
   return true
 }
+
+// Subir archivos en PDF
+exports.subirCV = (req, res, next) => {
+  upload(req, res, function(error) {
+    if (error) {
+      if (error instanceof multer.MulterError) {
+        if (error.code === 'LIMIT_FILE_SIZE') {
+          req.flash('error', 'El archvio es muy grande; máximo 200kb')
+        } else {
+          req.flash('error', error.message)
+        }
+      } else {
+        req.flash('error', error.message)
+      }
+      res.redirect('back')
+      return
+    } else {
+      return next()
+    }
+  })
+}
+
+//opciones de multer
+const configuracionMulter = {
+  limits: { fileSize: 200000 },
+  storage: fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, __dirname+'../../public/uploads/cv')
+    },
+    filename: (req, file, cb) => {
+      const extencion = file.mimetype.split('/')[1]
+      cb(null, `${shortid.generate()}.${extencion}`)
+    }
+  }),
+  fileFilter(req, file, cb) {
+    if (file.mimetype === 'application/pdf') {
+      cb(null, true)
+    } else {
+      cb(new Error('Formato no válido'), false)
+    }
+  }
+}
+
+const upload = multer(configuracionMulter).single('cv')
