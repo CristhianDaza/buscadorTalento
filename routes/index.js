@@ -66,6 +66,11 @@ module.exports = () => {
     authController.enviarToken
   )
 
+  // resetear password almacenar en la base de datos
+  router.get('/reestablecer-password/:token',
+    authController.reestablecerPassword
+  )
+
   // Panel de administracion
   router.get('/administracion',
     authController.verificarUsuario,
