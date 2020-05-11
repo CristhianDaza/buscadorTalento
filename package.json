@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon ./index",
     "watch": "webpack --w --mode development",
-    "start": "concurrently \"npm run dev\" \"npm run watch\""
+    "desarollo": "concurrently \"npm run dev\" \"npm run watch\"",
+    "start": "node ./index.js"
   },
   "author": "Cristhian Daza",
   "license": "ISC",
